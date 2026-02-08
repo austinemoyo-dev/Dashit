@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  /* Primary Theme - Orange */
+  --color-primary: #FF7A00;
+  --color-primary-dark: #E96B00;
+  --color-primary-light: #FFE2C6;
+  
+  /* Background & Surface */
+  --color-background: #F9FAFB;
+  --color-surface: #FFFFFF;
+  
+  /* Text Colors */
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #6B7280;
+  
+ /* Borders & Accents */
+   --color-border-muted: #E5E7EB;
+  --color-accent: #2563EB; 
+}
+
+/* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
