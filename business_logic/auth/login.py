@@ -1,28 +1,17 @@
+from business_logic.db import get_connection
 
-# business-logic/auth/login.py
+def login_user(email, password):
+    conn = get_connection()
+    cursor = conn.cursor()
 
-def login_user(email: str, password: str):
-    """
-    Handles user login logic.
+    cursor.execute(
+        "SELECT id, email, password, role FROM users WHERE email = ?",
+        (email,)
+    )
+    row = cursor.fetchone()
+    conn.close()
 
-    Returns:
-    {
-        success: bool,
-        message: str,
-        token: str | None,
-        user: dict | None
-    }
-    """
-
-    # TEMPORARY fake user (for now)
-    fake_user = {
-        "id": 1,
-        "email": "test@example.com",
-        "password": "1234",   # later this will be hashed
-        "role": "vendor"
-    }
-
-    if email != fake_user["email"]:
+    if not row:
         return {
             "success": False,
             "message": "User not found",
@@ -30,7 +19,9 @@ def login_user(email: str, password: str):
             "user": None
         }
 
-    if password != fake_user["password"]:
+    user_id, email, stored_password, role = row
+
+    if password != stored_password:
         return {
             "success": False,
             "message": "Invalid password",
@@ -38,16 +29,13 @@ def login_user(email: str, password: str):
             "user": None
         }
 
-    # TEMP token (real JWT later)
-    token = "sample-login-token"
-
     return {
         "success": True,
         "message": "Login successful",
-        "token": token,
+        "token": "sample-login-token",
         "user": {
-            "id": fake_user["id"],
-            "email": fake_user["email"],
-            "role": fake_user["role"]
+            "id": user_id,
+            "email": email,
+            "role": role
         }
     }
