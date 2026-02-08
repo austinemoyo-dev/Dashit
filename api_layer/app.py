@@ -1,7 +1,6 @@
-# api-layer/app.py
 
+from api_layer.routes.auth import auth_routes
 from flask import Flask
-from routes.auth import auth_routes
 
 app = Flask(__name__)
 app.register_blueprint(auth_routes)
