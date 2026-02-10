@@ -24,3 +24,24 @@ def get_user_profile(user_id):
         "message": "Profile fetched successfully",
         "profile": dict(zip(keys, row))
     }
+
+def update_user_profile(user_id, full_name, phone, address):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE users
+        SET full_name = ?, phone = ?, address = ?
+        WHERE id = ?
+        """,
+        (full_name, phone, address, user_id)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "success": True,
+        "message": "User profile updated successfully"
+    }
