@@ -19,7 +19,8 @@ export const authAPI = {
     const response = await api.post('/auth/register', { 
       email, 
       password, 
-      role 
+      role,
+ 
     });
     return response.data;
   },

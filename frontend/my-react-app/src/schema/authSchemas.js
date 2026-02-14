@@ -12,6 +12,17 @@ export const loginSchema = z.object({
 });
 
 export const registerSchema = z.object({
+  fullName: z
+  .string()
+  .min(1, 'Full name is required')
+  .min(6, 'Full name must be at least 6 characters'),
+  telNo: z.int(),
+  address: z
+  .string()
+  .min(1, 'Address is required')
+  .min(6, 'Address must be at least 6 characters'),
+  
+  
   email: z
     .string()
     .min(1, 'Email is required')
