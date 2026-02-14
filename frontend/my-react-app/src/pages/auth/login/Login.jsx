@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema } from '../../../schema/authSchemas.js';
-import { authAPI } from '../../../api/auth';
+import { loginSchema } from "../../../schema/authSchemas";
+import { authAPI } from "../../../api/auth.js";
+import { useAuth } from '../../../hooks/useAuth.js';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [apiError, setApiError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const {
     register,
@@ -26,7 +28,10 @@ function Login() {
     setApiError('');
     try {
       const response = await authAPI.login(data.email, data.password);
-      if (response.token) localStorage.setItem('token', response.token);
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+        login(response);
+      }
       navigate('/home');
     } catch (err) {
       setApiError(err.response?.data?.message || 'Invalid email or password');
@@ -35,7 +40,6 @@ function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB] p-6 selection:bg-[#FFE2C6]">
-      {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div className="absolute top-[-5%] left-[-5%] w-[350px] h-[350px] bg-[#FFE2C6] rounded-full blur-[100px] opacity-40" />
       </div>
@@ -49,7 +53,6 @@ function Login() {
             </h2>
           </div>
 
-          {/* API Error Display */}
           {apiError && (
             <div className="mb-5 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
               <p className="text-sm text-red-700 font-medium">{apiError}</p>
@@ -57,7 +60,6 @@ function Login() {
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Email Field */}
             <div className="space-y-1.5">
               <label className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Email Address
@@ -79,7 +81,6 @@ function Login() {
               )}
             </div>
 
-            {/* Password Field with Eye Toggle */}
             <div className="space-y-1.5">
               <label className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Password

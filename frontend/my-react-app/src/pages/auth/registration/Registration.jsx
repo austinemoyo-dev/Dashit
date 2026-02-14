@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema } from "../../../schema/authSchemas.js";
-import { authAPI } from "../../../api/auth";
+import { registerSchema } from "../../../schema/authSchemas";
+import { authAPI } from "../../../api/auth.js";
 
-function Register() {
+function Registration() {
   const [showPassword, setShowPassword] = useState(false);
   const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
@@ -46,7 +46,6 @@ function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB] p-6 selection:bg-[#FFE2C6]">
-      {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div className="absolute top-[-5%] left-[-5%] w-[350px] h-[350px] bg-[#FFE2C6] rounded-full blur-[100px] opacity-40" />
       </div>
@@ -59,7 +58,6 @@ function Register() {
             </h2>
           </div>
 
-          {/* API Error Display */}
           {apiError && (
             <div className="mb-5 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
               <p className="text-sm text-red-700 font-medium">{apiError}</p>
@@ -67,9 +65,9 @@ function Register() {
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Fullname Field */}
+            {/* Full Name */}
             <div className="space-y-1.5">
-              <label for="fullName" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
+              <label htmlFor="fullName" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Full Name
               </label>
               <input
@@ -77,22 +75,18 @@ function Register() {
                 id="fullName"
                 {...register("fullName")}
                 className={`w-full px-5 py-4 bg-[#F3F4F6] border-2 rounded-2xl text-[#1F2937] transition-all focus:bg-white outline-none ${
-                  errors.fullName
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-transparent focus:border-[#FF7A00]"
+                  errors.fullName ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-[#FF7A00]"
                 }`}
                 placeholder="Enter full name"
               />
               {errors.fullName && (
-                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">
-                  {errors.fullName.message}
-                </p>
+                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">{errors.fullName.message}</p>
               )}
             </div>
 
-            {/* Email Field */}
+            {/* Email */}
             <div className="space-y-1.5">
-              <label for="email" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
+              <label htmlFor="email" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Email Address
               </label>
               <input
@@ -100,21 +94,18 @@ function Register() {
                 id="email"
                 {...register("email")}
                 className={`w-full px-5 py-4 bg-[#F3F4F6] border-2 rounded-2xl text-[#1F2937] transition-all focus:bg-white outline-none ${
-                  errors.email
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-transparent focus:border-[#FF7A00]"
+                  errors.email ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-[#FF7A00]"
                 }`}
                 placeholder="Enter email"
               />
               {errors.email && (
-                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">
-                  {errors.email.message}
-                </p>
+                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">{errors.email.message}</p>
               )}
             </div>
-            {/* Phone No */}
+
+            {/* Phone Number */}
             <div className="space-y-1.5">
-              <label for="telNo" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
+              <label htmlFor="telNo" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Phone Number
               </label>
               <input
@@ -122,21 +113,18 @@ function Register() {
                 id="telNo"
                 {...register("telNo")}
                 className={`w-full px-5 py-4 bg-[#F3F4F6] border-2 rounded-2xl text-[#1F2937] transition-all focus:bg-white outline-none ${
-                  errors.telNo
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-transparent focus:border-[#FF7A00]"
+                  errors.telNo ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-[#FF7A00]"
                 }`}
                 placeholder="Enter phone number"
               />
               {errors.telNo && (
-                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">
-                  {errors.telNo.message}
-                </p>
+                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">{errors.telNo.message}</p>
               )}
             </div>
 
+            {/* Address */}
             <div className="space-y-1.5">
-              <label for="address" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
+              <label htmlFor="address" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Address
               </label>
               <input
@@ -144,22 +132,18 @@ function Register() {
                 id="address"
                 {...register("address")}
                 className={`w-full px-5 py-4 bg-[#F3F4F6] border-2 rounded-2xl text-[#1F2937] transition-all focus:bg-white outline-none ${
-                  errors.address
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-transparent focus:border-[#FF7A00]"
+                  errors.address ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-[#FF7A00]"
                 }`}
                 placeholder="Enter address"
               />
               {errors.address && (
-                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">
-                  {errors.address.message}
-                </p>
+                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">{errors.address.message}</p>
               )}
             </div>
 
-            {/* Password Field with Eye Toggle */}
+            {/* Password */}
             <div className="space-y-1.5">
-              <label for="password" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
+              <label htmlFor="password" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Password
               </label>
               <div className="relative">
@@ -168,9 +152,7 @@ function Register() {
                   id="password"
                   {...register("password")}
                   className={`w-full px-5 py-4 bg-[#F3F4F6] border-2 rounded-2xl text-[#1F2937] transition-all focus:bg-white outline-none placeholder:text-gray-400 ${
-                    errors.password
-                      ? "border-red-400 focus:border-red-500"
-                      : "border-transparent focus:border-[#FF7A00]"
+                    errors.password ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-[#FF7A00]"
                   }`}
                   placeholder="••••••••••••"
                 />
@@ -180,58 +162,32 @@ function Register() {
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#FF7A00] transition-colors p-2"
                 >
                   {showPassword ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
-                      />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
                     </svg>
                   ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M2.036 12.322a1.012 1.012 0 010-.644C3.323 7.943 7.243 4.5 12 4.5c4.757 0 8.677 3.443 9.964 7.878.085.292.085.586 0 .878C20.677 17.057 16.757 20.5 12 20.5c-4.758 0-8.678-3.443-9.964-7.878z"
-                      />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.644C3.323 7.943 7.243 4.5 12 4.5c4.757 0 8.677 3.443 9.964 7.878.085.292.085.586 0 .878C20.677 17.057 16.757 20.5 12 20.5c-4.758 0-8.678-3.443-9.964-7.878z" />
                       <circle cx="12" cy="12" r="3" />
                     </svg>
                   )}
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">
-                  {errors.password.message}
-                </p>
+                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">{errors.password.message}</p>
               )}
             </div>
 
-            {/* Role Selection */}
+            {/* Role */}
             <div className="space-y-1.5">
-              <label for="role" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
+              <label htmlFor="role" className="text-[11px] uppercase tracking-widest font-bold text-[#6B7280] ml-1">
                 Account Type
               </label>
               <select
                 {...register("role")}
                 id="role"
                 className={`w-full px-5 py-4 bg-[#F3F4F6] border-2 rounded-2xl text-[#1F2937] transition-all focus:bg-white outline-none ${
-                  errors.role
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-transparent focus:border-[#FF7A00]"
+                  errors.role ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-[#FF7A00]"
                 }`}
               >
                 <option value="customer">Customer</option>
@@ -239,9 +195,7 @@ function Register() {
                 <option value="rider">Rider</option>
               </select>
               {errors.role && (
-                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">
-                  {errors.role.message}
-                </p>
+                <p className="text-xs text-red-600 ml-1 mt-1 font-medium">{errors.role.message}</p>
               )}
             </div>
 
@@ -253,9 +207,7 @@ function Register() {
               <span className="flex items-center justify-center gap-2">
                 {isSubmitting ? "Creating Account..." : "Create Account"}
                 {!isSubmitting && (
-                  <span className="group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
                 )}
               </span>
             </button>
@@ -264,9 +216,7 @@ function Register() {
           <div className="mt-10 pt-6 border-t border-gray-100 text-center text-sm">
             <p className="text-[#6B7280]">
               Already have an account?{" "}
-              <Link to="/login" className="text-[#FF7A00] font-bold">
-                Sign in
-              </Link>
+              <Link to="/login" className="text-[#FF7A00] font-bold">Sign in</Link>
             </p>
           </div>
         </div>
@@ -275,4 +225,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Registration;

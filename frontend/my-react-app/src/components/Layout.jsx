@@ -1,15 +1,11 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <>
-      
-    <Outlet />
-    </>
-    
-  )
-  
-}
+    <div className="min-h-screen">
+      <Outlet />
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;
