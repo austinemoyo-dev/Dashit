@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 function Home() {
+  const { user, logout } = useAuth();
+
   const categories = [
     { name: 'Fast Food', icon: '🍔', count: '120+ Places' },
     { name: 'Healthy', icon: '🥗', count: '80+ Places' },
@@ -17,10 +20,26 @@ function Home() {
             DASH<span className="text-[#FF7A00]">IT</span>
           </div>
           <div className="space-x-4">
-            <Link to="/login" className="text-white font-bold px-6 py-2">Login</Link>
-            <Link to="/register" className="bg-[#FF7A00] text-white font-bold px-6 py-3 rounded-2xl hover:bg-[#E96B00] transition-all">
-              Sign Up
-            </Link>
+            {user ? (
+              // Show logout button if user is logged in
+              <button 
+                onClick={logout}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-2xl transition-all flex items-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                </svg>
+                Logout
+              </button>
+            ) : (
+              // Show login/signup if user is not logged in
+              <>
+                <Link to="/login" className="text-white font-bold px-6 py-2">Login</Link>
+                <Link to="/register" className="bg-[#FF7A00] text-white font-bold px-6 py-3 rounded-2xl hover:bg-[#E96B00] transition-all">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         </nav>
 
@@ -46,6 +65,15 @@ function Home() {
                 Search
               </button>
             </div>
+
+            {/* Show welcome message if logged in */}
+            {user && (
+              <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl">
+                <p className="text-white font-medium">
+                  ✨ Welcome back! Start exploring restaurants.
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="lg:w-1/2 mt-12 lg:mt-0 relative">
@@ -131,9 +159,15 @@ function Home() {
           <p className="text-white/80 text-xl font-medium mb-10 max-w-xl mx-auto">
             Order from the best restaurants in your city and get it delivered in record time.
           </p>
-          <Link to="/register" className="bg-[#1F2937] text-white px-12 py-5 rounded-[2rem] font-black text-xl hover:scale-105 transition-all inline-block shadow-2xl">
-            Get Started Now
-          </Link>
+          {user ? (
+            <button className="bg-[#1F2937] text-white px-12 py-5 rounded-[2rem] font-black text-xl hover:scale-105 transition-all inline-block shadow-2xl">
+              Browse Restaurants
+            </button>
+          ) : (
+            <Link to="/register" className="bg-[#1F2937] text-white px-12 py-5 rounded-[2rem] font-black text-xl hover:scale-105 transition-all inline-block shadow-2xl">
+              Get Started Now
+            </Link>
+          )}
         </div>
       </section>
     </div>

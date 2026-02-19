@@ -1,5 +1,5 @@
-import indexRoutes from "./routes/IndexRoutes";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import indexRoutes from "./routes/IndexRoutes";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
 
@@ -11,7 +11,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Navigate to="/login" replace />
+          element: <Navigate to="/home" replace />  //home
         },
         ...indexRoutes
       ],
